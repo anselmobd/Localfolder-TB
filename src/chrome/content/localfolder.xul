@@ -3,42 +3,134 @@
 
 <!DOCTYPE window SYSTEM "chrome://localfolder/locale/localfolder.dtd">
 
-<window id="localfolder"
-			title="&eu.philoux.localfolder.titre;"
-  			xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-  			onload="eu.philoux.localfolder.initDlg();">
+<window id="localfolder" title="&eu.philoux.localfolder.titre;"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul" xmlns:html="http://www.w3.org/1999/xhtml"
+	onload="eu.philoux.localfolder.initDlg();">
 
-	<script type="application/x-javascript" src="chrome://localfolder/content/localfolder.js"/>
+	<script type="application/x-javascript" src="chrome://localfolder/content/localfolder.js" />
 	<script type="application/x-javascript" src="chrome://localfolder/content/trace.js"/>
 	
 	<keyset id="keys">
 	  <key keycode="VK_ESCAPE" oncommand="window.close();"/>
 	</keyset>
 	
-	<hbox id="localfolder_bandeau">
-		<description id="localfolder_bandeau_titre">&eu.philoux.localfolder.bandeau.titre;</description>
-	</hbox>
-	<menuseparator/>
+
+	<hbox class="">
+		
+		<vbox  class="ext-chrome">
+			<hbox flex="0" class="localfolder-icon">
+            <image src="chrome://localfolder/skin/LocalFolders-64px.png" width="48px" height="48px"
+              maxwidth="48px" maxheight="48px" onclick="eu.philoux.localfolder.urlLoad('https://github.com/cleidigh/LocalFolder-TB')"/>
+		  </hbox>
+		  <vbox flex="1" class="c1"></vbox>
+		  <vbox>
+			<hbox flex="0" class="ext-info-icon">
+            <image id="home_button" src="chrome://localfolder/skin/github-logo-32px.png" width="20px" height="20px"
+              maxwidth="20px" maxheight="20px"  onclick="eu.philoux.localfolder.urlLoad('https://github.com/cleidigh/LocalFolder-TB')"/>
+			  <label style="padding-left: 6px"  value="GH Home" accesskey="G"  oncommand="urlLoad('https://github.com/cleidigh/LocalFolder-TB');" control="home_button"/>
+
+			  </hbox>
+			</vbox>
+		  <vbox>
+			<hbox flex="0" class="ext-info-icon">
+            <image id="help_button" src="chrome://localfolder/skin/LocalFolders-20px.png" width="24px" height="24px"
+			  maxwidth="22px" maxheight="22px"   onclick="eu.philoux.localfolder.urlLoad('chrome://localfolder/content/help.html')"/>
+			  <label style="padding-left: 6px" value="Help" accesskey="H" control="help_button"/> 
+		  	</hbox>
+		  
+			</vbox>
+			<vbox>
+			<hbox flex="0" class="ext-info-icon">
+            <image  id="info_button" src="chrome://localfolder/skin/info-32px.png" width="22px" height="22px"
+              maxwidth="22px" maxheight="22px"   onclick="eu.philoux.localfolder.urlLoad('chrome://localfolder/content/info.html')"/>
+			  <label style="padding-left: 6px"  value="Info" accesskey="I"  control="info_button"/>
+
+			  </hbox>
+			</vbox>
+			
+			
+			<vbox flex="0" class="c2" height="35px"></vbox>
+		</vbox>
+		<vbox class="">
+	  <html:fieldset id="localfolder_bandeau">
+	<html:legend id="localfolder_bandeau_titre">&eu.philoux.localfolder.bandeau.titre;</html:legend>
 	
 	<vbox flex="1" class="localfolder-zone">
 		<vbox>
-			<hbox flex="1" align="center" style="margin-bottom: 20px">
-				<label value="&eu.philoux.localfolder.libnom;" accesskey="&eu.philoux.localfolder.libnom.accesskey;" control="localfoldernom"/>
-				<textbox id="localfoldernom" flex="1"/>
-			</hbox>
-			<label value="&eu.philoux.localfolder.libchemin;"/>
-			<hbox flex="1" style="margin-bottom: 15px">
-				<textbox id="localfolderchemin" readonly="true"  flex="1" tabindex="-1"/>
-				<button label="&eu.philoux.localfolder.chemin.btlib;" 
+
+				<hbox flex="1" class="c3">
+				<vbox style="margin-bottom: 0x" class="c1">
+
+				<hbox flex="0"  min-height="1.4ex" style="padding-top: 4px; padding-bottom: 16px;">
+				<label value="&eu.philoux.localfolder.libnom;" accesskey="&eu.philoux.localfolder.libnom.accesskey;" control="localfoldernom" style="margin-bottom: 0px; padding-top: 0px" size="30" class="c2"  min-height="1.4ex"/>
+				</hbox>
+				<hbox flex="0"  min-height="1.4ex">
+				<label value="&eu.philoux.localfolder.libchemin;" style="margin-bottom: 0px; padding-top: 6px" class="c4"  min-height="1.4ex"/>
+				</hbox>
+				<vbox style="margin-bottom: 0px" class="c2"  min-height="1.4ex"></vbox>
+				</vbox>
+				<vbox style="margin-bottom: 0px">
+					<textbox id="localfoldernom" flex="1" style="padding-bottom: 8px" min-height="1.2ex"/>
+					<vbox height="8px"></vbox>
+					<textbox id="localfolderchemin" readonly="true"  flex="1" tabindex="-1" style="padding-bottom: 8px" size="60"  min-height="1.2ex" class="c1"/>
+					<vbox height="8px"></vbox>
+				<hbox pack="end">
+
+					<button label="&eu.philoux.localfolder.chemin.btlib;" 
 						id="localfoldercheminbtsel"
 						browsertitle="&eu.philoux.localfolder.chemin.browsertitle;"
-            			accesskey="&eu.philoux.localfolder.chemin.btlibcle;" oncommand="eu.philoux.localfolder.SelectChemin()"/>
+            			accesskey="&eu.philoux.localfolder.chemin.btlibcle;" oncommand="eu.philoux.localfolder.SelectChemin()" style="margin-bottom: 0px"  flex="0" min-height="1.4ex"/>
+					</hbox>
+
+				</vbox>
 			</hbox>
 		</vbox>
 	</vbox>
-	<menuseparator/>
+	
+	<vbox height="5px"></vbox>
+	</html:fieldset>
+	<html:fieldset id="localfolder_specialfolders_set">
+	<html:legend id="localfolder_bandeau_titre">Add Special Mail Folders</html:legend>
+
+	<hbox flex="1" class="c1">
+	<hbox flex="1" minwidth="80px" class="">
+	<vbox>
+			<checkbox id="add_all_folders" label="All" accesskey="A" oncommand="eu.philoux.localfolder.addAllSpecialFolders()"/>
+		<label value="" />
+		<label value="" />
+	</vbox>
+</hbox>
+<div class="d1"></div>
+
+<hbox flex="1" style="padding-left: 10px; padding-right: 35px;">
+	<vbox>
+		<checkbox id="add_folder_sent" label="Sent" accesskey="S"/>
+		<checkbox id="add_folder_drafts" label="Drafts" accesskey="D"/>
+		<checkbox id="add_folder_templates" label="Templates" accesskey="T"/>
+	</vbox>
+	<vbox>
+		<checkbox id="add_folder_archives" label="Archives" accesskey="V"/>
+		<checkbox id="add_folder_junk" label="Junk" accesskey="J"/>
+	</vbox>
+	
+</hbox>
+<html:div class="d1"></html:div>
+	<hbox flex="1" pack="end" align="right" class="c3" style="padding-left: 10px">
+	<vbox >
+		<label value="Added by Default:" />
+		<checkbox label=" Trash" disabled="true" checked="true" style="padding-left: 15px"/>
+		<checkbox label=" Outbox" disabled="true" checked="true" style="padding-left: 15px"/>
+	</vbox>
+</hbox>
+		
+</hbox>
+	</html:fieldset>
+
+	<vbox height="5px"></vbox>
 	<hbox align="right">	
   	<button id="localfolder.btQuitter" label="&eu.philoux.localfolder.btQuitter;" oncommand="close();"/>
   	<button id="localfolder.btValider" label="&eu.philoux.localfolder.btValider;" oncommand="eu.philoux.localfolder.btCreeDossierLocal();"/>		
   </hbox>
+</vbox>
+</hbox>
 </window>

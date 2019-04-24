@@ -1,9 +1,72 @@
 // cleidigh - update for TB 60.*
+// const { folderpane } = ChromeUtils.import("chrome://localfolder/content/folderpane.js");
 
 // encapsulation objet
 if (!eu) var eu = {};
 if (!eu.philoux) eu.philoux = {};
 if (!eu.philoux.localfolder) eu.philoux.localfolder = {};
+
+
+const SEND_FOLDER_FLAGS = 0x200;
+const DRAFTS_FOLDER_FLAGS = 0x400;
+const TEMPLATES_FOLDER_FLAGS = 0x400000;
+const ARCHIVES_FOLDER_FLAGS = 0x4000;
+const JUNK_FOLDER_FLAGS = 0x40000000;
+
+
+eu.philoux.localfolder.specialFolders = {
+	"Sent": {"directoryName": "Sent", "flags": SEND_FOLDER_FLAGS },
+	"Drafts": {"directoryName": "Drafts", "flags": DRAFTS_FOLDER_FLAGS },
+	"Templates": {"directoryName": "Templates", "flags": TEMPLATES_FOLDER_FLAGS },
+	"Archives": {"directoryName": "Archives", "flags": ARCHIVES_FOLDER_FLAGS },
+	"Junk": {"directoryName": "Junk", "flags": JUNK_FOLDER_FLAGS }
+}
+
+// Extension Information Icons
+
+eu.philoux.localfolder.addAllSpecialFolders = function () {
+	eu.philoux.localfolder.LocalFolderTrace('HadSpecial ');
+	const addAllCheckbox = document.getElementById("add_all_folders").checked;
+	let addFolderElements = document.querySelectorAll("[id^='add_folder_']");
+
+	eu.philoux.localfolder.LocalFolderTrace('HadSpecial '+addFolderElements.length);
+	for (let index = 0; index < addFolderElements.length; index++) {
+  		const element = addFolderElements[index];
+		console.debug('element '+element.getAttribute("label"));
+		element.checked = !!addAllCheckbox;
+		element.disabled = !!addAllCheckbox;
+	}
+}
+
+eu.philoux.localfolder.addSpecialFolders = function (aParentFolder) {
+	let addFolderElements = document.querySelectorAll("[id^='add_folder_']");
+	// var filespec = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsIFile);
+
+	for (let index = 0; index < addFolderElements.length; index++) {
+  		const element = addFolderElements[index];
+		if (!!element.checked) {
+			// Add special folder
+			const l = element.getAttribute("label");
+			eu.philoux.localfolder.LocalFolderTrace('A folder: '+ l);
+			let sf = aParentFolder.addSubfolder(l);
+			sf.setFlag(eu.philoux.localfolder.specialFolders[l].flags )
+			
+		}
+	}
+}
+
+eu.philoux.localfolder.urlLoad = function (url) {
+	let tabmail = eu.philoux.localfolder.getMail3Pane(); 
+	// const ref = "https://thdoan.github.io/strftime/";
+	tabmail.openTab("chromeTab", { chromePage: url });
+}
+
+eu.philoux.localfolder.getMail3Pane = function() {
+	var w = Cc["@mozilla.org/appshell/window-mediator;1"]
+		.getService(Ci.nsIWindowMediator)
+		.getMostRecentWindow("mail:3pane");
+	return w;
+}
 
 /**
 *	initialisation boite de création de dossier
@@ -143,8 +206,18 @@ eu.philoux.localfolder.creeDossierLocal = function (nom, chemin) {
 		filespec.initWithPath(chemin);
 		srv.prettyName = nom;
 		srv.localPath = filespec;
+		
+		eu.philoux.localfolder.addSpecialFolders(srv.rootFolder);
+
 		var account = accountmanager.createAccount();
 		account.incomingServer = srv;
+		
+		// srv.rootFolder.deleteSubFolders(["Trash"], null);
+				// eu.philoux.localfolder.LocalFolderTrace('folder method '+ folderpane.p1);
+		// eu.philoux.localfolder.LocalFolderTrace('folder trash ');
+		// folderpane.refresh();
+		
+		// eu.philoux.localfolder.LocalFolderTrace('folder refresh inline ');
 
 		return account;
 	}

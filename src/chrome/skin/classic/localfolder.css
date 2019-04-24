@@ -3,14 +3,16 @@
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
 #localfolder{
-width: 500px;
-height: 180px;
+width: 550px;
+height: 200px;
+margin: 5px;
 }
 
 .localfolder-zone{
-margin-left: 20px;
-margin-top: 20px;
-margin-right: 20px;
+margin-left: 0px;
+margin-top: 0px;
+margin-right: 0px;
+width: 100%;
 }
 
 #localfolder_bandeau{
@@ -21,3 +23,80 @@ width: 100%;
 #localfolder_bandeau_titre{
 font-weight: bold;
 }
+
+
+.c1 {
+	/* background-color: greenyellow; */
+}
+
+
+.c2 {
+	/* background-color: aliceblue; */
+}
+
+.c3 {
+	/* background-color: aqua; */
+}
+
+
+.c4 {
+	/* background-color: darkorange; */
+}
+
+.d1 {
+	/* border-style: solid; */
+	/* border-right:  0.5px !important; */
+	/* border-color: black !important; */
+	background-color: black;
+	width: 1px;
+	height: 100%;
+}
+
+.ext-chrome {
+	/* background-color: antiquewhite; */
+	width: 80px;
+	height: 100%;
+}
+
+.localfolder-icon {
+	/* background-color: darkorange; */
+	padding-top: 8px;
+	padding-left: 6px;
+}
+
+
+.ext-info-icon {
+	/* background-color: darkorange; */
+	padding-top: 8px;
+	padding-bottom: 4px;
+	padding-left: 6px;
+}
+
+.all {
+	border-style: solid;
+	border-bottom: 0.5px !important;
+	border-left: 0.5px !important;
+	border-top: 0.5px !important;
+	border-bottom: 0.5px !important;
+	border-bottom-width: 4px !important;
+	border-color: black !important;
+	/* background-color: darkorange; */
+}
+
+/* #localfolder-button.toolbarbutton-1 { */
+	/* list-style-image: url("chrome://localfolder/skin/LocalFolders-32px.png"); */
+	/* list-style-image: url("chrome://localfolder/skin/LocalFolders-20px.png"); */
+/* }    */
+
+/* 
+#localfolder-button,#mail-toolbox > toolbar[brighttext] #localfolder-button.toolbarbutton-1 {
+	list-style-image: url("chrome://localfolder/skin/LocalFolders-20px.png");
+}
+*/
+
+/* toolbar[iconsize="small"] #localfolder-button,#mail-toolbox > toolbar[brighttext][iconsize="small"] #localfolder-button.toolbarbutton-1 { */
+	/* list-style-image: url("chrome://localfolder/skin/LocalFolders-20px.png") !important;} */
+
+
+#mzts-button,#mail-toolbox > toolbar[brighttext] #mzts-button.toolbarbutton-1{list-style-image: url("chrome://localfolder/skin/LocalFolders-20.png");}
+toolbar[iconsize="small"] #mzts-button,#mail-toolbox > toolbar[brighttext][iconsize="small"] #mzts-button.toolbarbutton-1{list-style-image: url("chrome://localfolder/skin/LocalFolders-20px.png") !important;}

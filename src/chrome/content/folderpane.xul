@@ -1,0 +1,27 @@
+<?xml version="1.0"?> 
+<!DOCTYPE overlay>
+
+<?xml-stylesheet href="chrome://localfolder/skin/localfolder.css" type="text/css"?>
+
+<overlay xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	
+	<script type="application/x-javascript" src="chrome://localfolder/content/trace.js"/>
+	<script type="application/x-javascript" src="chrome://localfolder/content/folderpane.js"/>
+		
+		
+<!-- Thunderbird mail -->
+<toolbarpalette id="MailToolbarPalette">
+  <toolbarbutton id="mzts-button"/>
+  </toolbarpalette>
+
+<!-- button details -->
+<toolbarpalette id="MailToolbarPalette">
+	<toolbarbutton id="mzts-button"
+	  label="LocalFolders"
+	  oncommand="eu.philoux.localfolder.NewLocalFolder2();"
+	  tooltiptext="Add LocalFolders"
+	  class="toolbarbutton-1"
+	  />
+</toolbarpalette>
+  
+</overlay>        

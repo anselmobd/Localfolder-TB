@@ -13,3 +13,4 @@ locale   localfolder  zh-CN  chrome/locale/zh-CN/
 
 overlay	chrome://messenger/content/AccountManager.xul	chrome://localfolder/content/accountmanager-overlay.xul
 overlay	chrome://global/content/commonDialog.xul	chrome://localfolder/content/commonDialog-overlay.xul
+overlay chrome://messenger/content/messenger.xul 		chrome://localfolder/content/folderpane.xul
