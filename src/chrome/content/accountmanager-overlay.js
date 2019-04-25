@@ -71,7 +71,9 @@ eu.philoux.localfolder.onSupprimeCompte = function (e) {
 			var bundle = Services.strings.createBundle("chrome://localfolder/locale/localfolder.properties");
 			var confirmTitle = bundle.GetStringFromName("ConfirmRemoveTitle");
 			var confirmRemoveAccount = bundle.formatStringFromName("ConfirmRemoveFolder", [prettyName], 1);
-			let review = Services.prompt.confirm(window, confirmTitle, confirmRemoveAccount);
+
+			var removeData = {value: false};
+			let review = Services.prompt.confirmCheck(window, confirmTitle, confirmRemoveAccount, "Delete All Subfolders and Data", removeData);
 
 			eu.philoux.localfolder.LocalFolderTrace(confirmRemoveAccount +' '+ review);
 
@@ -83,6 +85,15 @@ eu.philoux.localfolder.onSupprimeCompte = function (e) {
 				// clear cached data out of the account array
 				currentAccount = currentPageId = null;
 
+				eu.philoux.localfolder.LocalFolderTrace("acount path: 3");
+				eu.philoux.localfolder.LocalFolderTrace(server.rootFolder.filePath.path);
+				// eu.philoux.localfolder.LocalFolderTrace("after of account local: "+server.rootFolder.localPath.path);
+
+				eu.philoux.localfolder.LocalFolderTrace("after of account filepath: ");
+				const f = server.rootFolder.filePath.path;
+
+				// server.rootFolder.recursiveDelete(true, null);
+
 				var serverId = server.serverURI;
 				Components.classes["@mozilla.org/messenger/account-manager;1"]
 					.getService(Components.interfaces.nsIMsgAccountManager)
@@ -92,6 +103,20 @@ eu.philoux.localfolder.onSupprimeCompte = function (e) {
 					delete accountArray[serverId];
 				}
 				selectServer(null, null);
+
+				eu.philoux.localfolder.LocalFolderTrace("after of account last fall: "+ eu.philoux.localfolder.lastFolder);
+				var filespec = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsIFile);
+				// filespec.initWithPath("C:\\Dev\\Thunderbird\\Extensions XUL\\localfolder-tb-master\\xpi\\testF");
+				eu.philoux.localfolder.LocalFolderTrace("acount path: 2a "+f+ 'removeData: '+removeData);
+				if (removeData.value) {
+					filespec.initWithPath(f);
+					filespec.remove(true);
+					eu.philoux.localfolder.LocalFolderTrace("after o raw");
+				
+				}
+				// server.rootFolder.deleteSubFolders(["Trash"], null);
+				// server.rootFolder.deleteSubFolders(["Sent"], null);
+				eu.philoux.localfolder.LocalFolderTrace("after of account subfolder remove");
 			}
 			catch (ex) {
 				dump("failure to remove account: " + ex + "\n");

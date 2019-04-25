@@ -7,6 +7,8 @@ if (!eu.philoux) eu.philoux = {};
 if (!eu.philoux.localfolder) eu.philoux.localfolder = {};
 
 
+eu.philoux.localfolder.lastFolder = "";
+
 const SEND_FOLDER_FLAGS = 0x200;
 const DRAFTS_FOLDER_FLAGS = 0x400;
 const TEMPLATES_FOLDER_FLAGS = 0x400000;
@@ -207,6 +209,7 @@ eu.philoux.localfolder.creeDossierLocal = function (nom, chemin) {
 		srv.prettyName = nom;
 		srv.localPath = filespec;
 		
+		eu.philoux.localfolder.lastFolder = chemin;
 		eu.philoux.localfolder.addSpecialFolders(srv.rootFolder);
 
 		var account = accountmanager.createAccount();
@@ -217,7 +220,7 @@ eu.philoux.localfolder.creeDossierLocal = function (nom, chemin) {
 		// eu.philoux.localfolder.LocalFolderTrace('folder trash ');
 		// folderpane.refresh();
 		
-		// eu.philoux.localfolder.LocalFolderTrace('folder refresh inline ');
+		eu.philoux.localfolder.LocalFolderTrace('folder names '+chemin+'   '+eu.philoux.localfolder.lastFolder);
 
 		return account;
 	}
